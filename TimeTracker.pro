@@ -2,7 +2,10 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    timetracker.cpp \
+    activity.cpp \
+    activitystorage.cpp
 
 RESOURCES += qml.qrc
 
@@ -11,3 +14,9 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+HEADERS += \
+    timetracker.h \
+    ../activity.h \
+    activity.h \
+    activitystorage.h

@@ -4,28 +4,86 @@ import QtQuick.Layouts 1.1
 
 Item {
     width: 640
-    height: 480
+    height: 280
+    scale: 1
 
-    property alias button3: button3
-    property alias button2: button2
-    property alias button1: button1
+    property alias saveButton: saveButton
+    property alias activity: activity
+    property alias description: description
+    property alias timeSpent: timeSpent
 
-    RowLayout {
-        anchors.centerIn: parent
+    GridLayout {
+        height: 200
+        columns: 2
+        anchors.fill: parent
+        anchors.margins: 10
+        rowSpacing: 10
+        columnSpacing: 10
+/*
+        Label {
+            text: "Activity"
+        }
+        TextField {
+            id: activity
+            text: ""
+            focus: true
+            Layout.fillWidth: true
+            KeyNavigation.tab: description
 
-        Button {
-            id: button1
-            text: qsTr("Press Me 1")
+        }
+*/
+        Label {
+            text: "Activity"
+        }
+        ComboBox {
+            id: activity
+            focus: true
+            editable: true
+            Layout.fillWidth: true
+            model: activityModel
+            KeyNavigation.tab: description
+            onAccepted: {
+                 if (editableCombo.find(currentText) === -1) {
+                     model.append({text: editText})
+                     currentIndex = editableCombo.find(editText)
+                 }
+            }
         }
 
-        Button {
-            id: button2
-            text: qsTr("Press Me 2")
+        Label {
+            text: "Description"
+        }
+        TextArea {
+            id: description
+            text: ""
+            Layout.fillWidth: true
+            KeyNavigation.tab: timeSpent
         }
 
-        Button {
-            id: button3
-            text: qsTr("Press Me 3")
+        Label {
+            text: "Time spent"
+        }
+        SpinBox {
+            id: timeSpent
+            stepSize: 0.5
+            decimals: 2
+            value: 0.5
+            suffix: " hours"
+            KeyNavigation.tab: saveButton
+        }
+
+        Item {
+            Layout.columnSpan: 2
+            Layout.fillWidth: true
+            implicitHeight: saveButton.height
+
+            Button {
+                id: saveButton
+                activeFocusOnPress: true
+                anchors.centerIn: parent
+                text: "Accept"
+            }
         }
     }
+
 }
