@@ -3,6 +3,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 
 Item {
+
     width: 640
     height: 280
     scale: 1
@@ -82,6 +83,17 @@ Item {
                 activeFocusOnPress: true
                 anchors.centerIn: parent
                 text: "Accept"
+
+                Keys.onReturnPressed: {
+                    if(activity.editText != '') {
+                        timeTracker.saveActivity(activity.editText, description.text, timeSpent.value);
+                        Qt.quit();
+                    } else {
+                        messageDialog.show("Activity name can't be blank");
+                    }
+                }
+
+
             }
         }
     }

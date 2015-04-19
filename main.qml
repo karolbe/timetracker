@@ -25,15 +25,6 @@ ApplicationWindow {
 
     MainForm {
         anchors.fill: parent
-        saveButton.onClicked: {
-            if(activity.editText != '') {
-                timeTracker.saveActivity(activity.editText, description.text, timeSpent.value);
-                Qt.quit();
-            } else {
-                messageDialog.show("Activity name can't be blank");
-            }
-        }
-
         Keys.onPressed: {
            switch (event.key) {
            case Qt.Key_Escape:
