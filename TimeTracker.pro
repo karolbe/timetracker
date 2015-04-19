@@ -17,6 +17,5 @@ include(deployment.pri)
 
 HEADERS += \
     timetracker.h \
-    ../activity.h \
     activity.h \
     activitystorage.h
